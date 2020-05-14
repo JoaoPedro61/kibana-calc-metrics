@@ -1,5 +1,5 @@
 {
-  "name": "kbn_calc_metrics",
+  "name": "kbn-calc-metrics",
   "version": "0.0.0",
   "description": "An awesome Kibana plugin",
   "main": "index.js",
