@@ -1,0 +1,9 @@
+{
+  "paths": {
+    "kbnCalcMetrics": "./"
+  },
+  "translations": [
+    "translations/zh-CN.json"
+  ]
+}
+
