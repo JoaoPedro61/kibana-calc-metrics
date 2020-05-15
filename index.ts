@@ -23,4 +23,4 @@ const calcMetricsPluginInitializer = ({Plugin}) => new Plugin({
 
 });
 
-export default calcMetricsMetricPluginInitializer;
+export default calcMetricsPluginInitializer;
