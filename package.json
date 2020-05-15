@@ -1,5 +1,5 @@
 {
-  "name": "kbn-calc-metrics",
+  "name": "kbn_clt_mrs",
   "version": "0.0.0",
   "description": "A simple metric calculator",
   "main": "index.ts",

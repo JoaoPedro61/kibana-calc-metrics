@@ -9,8 +9,8 @@ import { ExtendedMetricVisComponent } from './components/extended_metric_vis_con
 
 export const visTypeDefinition = () => {
   return {
-    id: 'kbn-calc-metrics',
-    name: 'kbn-calc-metrics',
+    id: 'kbn_clt_mrs',
+    name: 'kbn_clt_mrs',
     title: i18n.translate('visTypeMetric.metricTitle', { defaultMessage: 'Extended Metric' }),
     icon: 'visMetric',
     description: i18n.translate('visTypeMetric.metricDescription', {

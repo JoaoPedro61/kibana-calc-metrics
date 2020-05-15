@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 
 const calcMetricsPluginInitializer = ({Plugin}) => new Plugin({
-  id: 'kbn-calc-metrics',
+  id: 'kbn_clt_mrs',
   require: ['kibana', 'elasticsearch', 'visualizations', 'interpreter', 'data'],
   publicDir: resolve(__dirname, 'public'),
   uiExports: {
