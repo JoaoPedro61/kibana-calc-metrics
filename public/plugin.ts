@@ -1,42 +1,45 @@
-import {
-  Plugin,
-  PluginInitializerContext,
-  CoreSetup,
-  CoreStart,
-  DataPublicPlugin,
-  VisualizationsSetup,
-  ExpressionsPublicPlugin
-} from './imports';
+export { Plugin as ExpressionsPublicPlugin } from './../../../src/plugins/expressions/public';
+export { PluginInitializerContext, CoreSetup, CoreStart, Plugin, IUiSettingsClient } from './../../../src/core/public';
+import { LegacyDependenciesPlugin } from './shim';
+import { Plugin as DataPublicPlugin } from '../../../src/plugins/data/public';
+import { VisualizationsSetup } from 'plugins/visualizations';
 
-import { definition } from './definition';
-import { factory } from './factory';
+import { visFn } from './vis_fn';
+// @ts-ignore
+import { visTypeDefinition } from './vis_type';
 
 
 
-export interface CalcMetricsPluginSetupDependencies {
-  expressions: ReturnType<ExpressionsPublicPlugin['setup']>;
-  visualizations: VisualizationsSetup;
+
+/** @internal */
+export interface MetricVisPluginSetupDependencies {
   data: ReturnType<DataPublicPlugin['setup']>;
-  __LEGACY?: any;
+  visualizations: VisualizationsSetup;
+  expressions: ReturnType<ExpressionsPublicPlugin['setup']>;
+  __LEGACY: LegacyDependenciesPlugin;
 }
 
-export class CalcMetricsVisPlugin implements Plugin<void, void> {
-  
-  public initializerContext: PluginInitializerContext;
 
-  constructor(context: PluginInitializerContext) {
-    this.initializerContext = context;
+
+/** @internal */
+export class MetricVisPlugin implements Plugin<void, void> {
+  initializerContext: PluginInitializerContext;
+
+  constructor(initializerContext: PluginInitializerContext) {
+    this.initializerContext = initializerContext;
   }
 
-  public setup(core: CoreSetup, { data, expressions, visualizations, __LEGACY }: CalcMetricsPluginSetupDependencies) {
-    if (__LEGACY && 'function' === typeof __LEGACY.setup) {
-      __LEGACY.setup();
-    }
-    expressions.registerFunction(factory);
+  public setup(
+    core: CoreSetup,
+    { data, visualizations, expressions, __LEGACY }: MetricVisPluginSetupDependencies
+  ) {
+    __LEGACY.setup();
 
-    visualizations.types.createReactVisualization(definition());
+    expressions.registerFunction(visFn);
+    visualizations.types.createReactVisualization(visTypeDefinition());
   }
 
-  public start(core: CoreStart): void {}
-
+  public start(core: CoreStart) {
+    // nothing to do here yet
+  }
 }

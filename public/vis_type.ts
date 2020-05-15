@@ -1,31 +1,24 @@
-import {
-  i18n,
-  Schemas,
-  vislibColorMaps,
-  Status
-} from './imports';
-import { ComponentVis } from './components/component.vis';
-import { ComponentVisOptions } from './components/component.vis.options';
+import { i18n } from '@kbn/i18n';
+
+// @ts-ignore
+import { Schemas } from '../../../src/legacy/ui/public/vis/editors/default/schemas';
+import { vislibColorMaps } from '../../../src/legacy/ui/public/vislib/components/color/colormaps';
+// @ts-ignore
+import { ExtendedMetricVisComponent } from './components/extended_metric_vis_controller';
 
 
-
-export const definition = (dependencies?) => {
+export const visTypeDefinition = () => {
   return {
-    type: 'kbn-calc-metrics',
+    id: 'kbn-calc-metrics',
     name: 'kbn-calc-metrics',
-    icon: 'metricbeatApp',
-    title: 'Metrics Calc',
-    description: 'Offers some features to perform calculations between aggregate data.',
-    requiresUpdateStatus: [
-      Status.AGGS,
-      Status.DATA,
-      Status.TIME,
-      Status.UI_STATE,
-      Status.TIME,
-      Status.RESIZE
-    ],
+    title: i18n.translate('visTypeMetric.metricTitle', { defaultMessage: 'Extended Metric' }),
+    icon: 'visMetric',
+    description: i18n.translate('visTypeMetric.metricDescription', {
+      defaultMessage: 'Based on the core Metric-Plugin but gives you the ability' +
+        'to output custom aggregates on metric-results.',
+    }),
     visConfig: {
-      component: ComponentVis,
+      component: ExtendedMetricVisComponent,
       defaults: {
         addTooltip: true,
         addLegend: false,
@@ -51,7 +44,6 @@ export const definition = (dependencies?) => {
       },
     },
     editorConfig: {
-      optionsTemplate: ComponentVisOptions,
       collections: {
         metricColorMode: [
           {
@@ -78,6 +70,7 @@ export const definition = (dependencies?) => {
           label: value.label,
         })),
       },
+      optionsTemplate: '<extended-metric-vis-params></extended-metric-vis-params>',
       schemas: new Schemas([
         {
           group: 'metrics',
@@ -116,6 +109,6 @@ export const definition = (dependencies?) => {
           aggFilter: ['!geohash_grid', '!geotile_grid', '!filter'],
         },
       ]),
-    }
+    },
   };
 };

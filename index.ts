@@ -1,29 +1,26 @@
 import { resolve } from 'path';
-import { Legacy } from './../../kibana';
-import { LegacyPluginApi, LegacyPluginInitializer } from './../../src/legacy/types';
 
 
 
-const kbnCalcMetricsVisPluginInitializer: LegacyPluginInitializer = ({ Plugin }: LegacyPluginApi) => {
-  return new Plugin({
-    require: ['elasticsearch', 'kibana', 'visualizations', 'interpreter', 'data'],
-    name: 'kbn-calc-metrics',
-    uiExports: {
-      visTypes: [
-        'plugins/kbn-calc-metrics/legacy'
-      ],
-      hacks: [
-        resolve(__dirname, 'public/legacy')
-      ],
-      injectDefaultVars: server => ({}),
-    },
-    config(Joi) {
-      return Joi.object({
-        enabled: Joi.boolean().default(true),
-      }).default();
-    },
-    init: (server: Legacy.Server, options) => ({}),
-  });
-}
+const calcMetricsPluginInitializer = ({Plugin}) => new Plugin({
+  id: 'kbn-calc-metrics',
+  require: ['kibana', 'elasticsearch', 'visualizations', 'interpreter', 'data'],
+  publicDir: resolve(__dirname, 'public'),
+  uiExports: {
+    styleSheetPaths: resolve(__dirname, 'public/index.css'),
+    hacks: [
+      resolve(__dirname, 'public/legacy')
+    ],
+    injectDefaultVars: server => ({})
+  },
+  init: server => ({}),
 
-export default kbnCalcMetricsVisPluginInitializer;
+  config(Joi) {
+    return Joi.object({
+      enabled: Joi.boolean().default(true)
+    }).default();
+  }
+
+});
+
+export default calcMetricsMetricPluginInitializer;

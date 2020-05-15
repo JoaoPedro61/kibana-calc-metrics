@@ -1,17 +1,12 @@
-import {
-  i18n,
-  vislibColorMaps,
-  InterpreterExpressionFunction,
-  InterpreterKibanaDatatable,
-  InterpreterRender,
-  InterpreterRange,
-  InterpreterStyle
-} from './imports';
+import { i18n } from '@kbn/i18n';
 
+// @ts-ignore
+import { vislibColorMaps } from '../../../src/legacy/ui/public/vislib/components/color/colormaps';
+import { ExpressionFunction, KibanaDatatable, Render, Range, Style } from './../../../src/plugins/interpreter/public';
 
-type Context = InterpreterKibanaDatatable;
+type Context = KibanaDatatable;
 
-const name = 'calcMetrics';
+const name = 'calcMetricVis';
 
 interface Arguments {
   percentage: boolean;
@@ -22,8 +17,8 @@ interface Arguments {
   showLabels: boolean;
   bgFill: string;
   subText: string;
-  colorRange: InterpreterRange[];
-  font: InterpreterStyle;
+  colorRange: Range[];
+  font: Style;
   metric: any[]; // these aren't typed yet
   bucket: any; // these aren't typed yet
 }
@@ -64,9 +59,9 @@ interface RenderValue {
   params: any;
 }
 
-type Return = InterpreterRender<RenderValue>;
+type Return = Render<RenderValue>;
 
-export const factory = (): InterpreterExpressionFunction<
+export const visFn = (): ExpressionFunction<
   typeof name,
   Context,
   Arguments,
@@ -192,7 +187,7 @@ export const factory = (): InterpreterExpressionFunction<
       as: 'visualization',
       value: {
         visData: context,
-        visType: 'calcMetrics',
+        visType: 'metric',
         visConfig: {
           metric: {
             percentageMode: args.percentage,
@@ -221,4 +216,3 @@ export const factory = (): InterpreterExpressionFunction<
     };
   },
 });
-

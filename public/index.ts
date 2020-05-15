@@ -1,5 +1,5 @@
-import { PluginInitializerContext } from './imports';
-import { CalcMetricsVisPlugin as Plugin } from './plugin';
+import { PluginInitializerContext } from 'kibana/public';
+import { MetricVisPlugin as Plugin } from './plugin';
 
 
 
