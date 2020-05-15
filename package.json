@@ -18,7 +18,8 @@
     "build": "plugin-helpers build"
   },
   "dependencies": {
-    "@kbn/i18n": "link:../../packages/kbn-i18n"
+    "@kbn/i18n": "link:../../packages/kbn-i18n",
+    "typescript": "^3.9.2"
   },
   "devDependencies": {
     "@elastic/eslint-config-kibana": "link:../../packages/eslint-config-kibana",
