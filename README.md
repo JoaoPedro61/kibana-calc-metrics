@@ -1,4 +1,4 @@
-# kbn-calc-metrics
+# kbn_clt_mrs
 
 > An awesome Kibana plugin
 
