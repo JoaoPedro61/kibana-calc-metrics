@@ -1,22 +1,17 @@
-import { i18n } from '@kbn/i18n';
-
-// @ts-ignore
-import { Schemas } from '../../../src/legacy/ui/public/vis/editors/default/schemas';
-import { vislibColorMaps } from '../../../src/legacy/ui/public/vislib/components/color/colormaps';
-// @ts-ignore
+import { Schemas } from 'plugins/vis_default_editor';
+import { colorSchemas as vislibColorMaps } from '../../../src/plugins/charts/public';
 import { ExtendedMetricVisComponent } from './components/extended_metric_vis_controller';
+
+import { OptionsComponent } from './components';
 
 
 export const visTypeDefinition = () => {
   return {
     id: 'kbn_clt_mrs',
     name: 'kbn_clt_mrs',
-    title: i18n.translate('visTypeMetric.metricTitle', { defaultMessage: 'Extended Metric' }),
+    title: 'Extended Metric',
     icon: 'visMetric',
-    description: i18n.translate('visTypeMetric.metricDescription', {
-      defaultMessage: 'Based on the core Metric-Plugin but gives you the ability' +
-        'to output custom aggregates on metric-results.',
-    }),
+    description: 'Based on the core Metric-Plugin but gives you the ability to output custom aggregates on metric-results.',
     visConfig: {
       component: ExtendedMetricVisComponent,
       defaults: {
@@ -44,38 +39,29 @@ export const visTypeDefinition = () => {
       },
     },
     editorConfig: {
+      optionsTemplate: OptionsComponent,
       collections: {
         metricColorMode: [
           {
             id: 'None',
-            label: i18n.translate('visTypeMetric.colorModes.noneOptionLabel', {
-              defaultMessage: 'None',
-            }),
+            label: 'None',
           },
           {
             id: 'Labels',
-            label: i18n.translate('visTypeMetric.colorModes.labelsOptionLabel', {
-              defaultMessage: 'Labels',
-            }),
+            label: 'Labels',
           },
           {
             id: 'Background',
-            label: i18n.translate('visTypeMetric.colorModes.backgroundOptionLabel', {
-              defaultMessage: 'Background',
-            }),
+            label: 'Background',
           },
         ],
-        colorSchemas: Object.values(vislibColorMaps).map((value: any) => ({
-          id: value.id,
-          label: value.label,
-        })),
+        colorSchemas: vislibColorMaps,
       },
-      optionsTemplate: '<extended-metric-vis-params></extended-metric-vis-params>',
       schemas: new Schemas([
         {
           group: 'metrics',
           name: 'metric',
-          title: i18n.translate('visTypeMetric.schemas.metricTitle', { defaultMessage: 'Metric' }),
+          title: 'Metric',
           min: 1,
           aggFilter: [
             '!std_dev',
@@ -101,9 +87,7 @@ export const visTypeDefinition = () => {
         {
           group: 'buckets',
           name: 'group',
-          title: i18n.translate('visTypeMetric.schemas.splitGroupTitle', {
-            defaultMessage: 'Split group',
-          }),
+          title: 'Split group',
           min: 0,
           max: 1,
           aggFilter: ['!geohash_grid', '!geotile_grid', '!filter'],
