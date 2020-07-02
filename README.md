@@ -1,4 +1,4 @@
-# datepicker-ui
+# KBN Calculate metrics
 
 > An awesome Kibana plugin
 
