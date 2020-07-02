@@ -1,8 +1,0 @@
-{
-  "extends": "../../../kibana/tsconfig.json",
-  "include": [
-    "public/**/*.ts",
-    "public/**/*.tsx",
-    "../index.ts"
-  ]
-}
