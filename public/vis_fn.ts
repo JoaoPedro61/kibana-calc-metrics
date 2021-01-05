@@ -1,7 +1,7 @@
 import { i18n } from '@kbn/i18n';
 
 // @ts-ignore
-import { vislibColorMaps } from '../../../src/legacy/ui/public/vislib/components/color/colormaps';
+import { vislibColorMaps } from '../../../src/plugins/charts/public';
 import { ExpressionFunction, KibanaDatatable, Render, Range, Style } from './../../../src/plugins/interpreter/public';
 
 type Context = KibanaDatatable;
@@ -72,99 +72,71 @@ export const visFn = (): ExpressionFunction<
   context: {
     types: ['kibana_datatable'],
   },
-  help: i18n.translate('visTypeMetric.function.help', {
-    defaultMessage: 'Metric visualization',
-  }),
+  help: 'Metric visualization',
   args: {
     percentage: {
       types: ['boolean'],
       default: false,
-      help: i18n.translate('visTypeMetric.function.percentage.help', {
-        defaultMessage: 'Shows metric in percentage mode. Requires colorRange to be set.',
-      }),
+      help: 'Shows metric in percentage mode. Requires colorRange to be set.',
     },
     colorScheme: {
       types: ['string'],
       default: '"Green to Red"',
       options: Object.values(vislibColorMaps).map((value: any) => value.id),
-      help: i18n.translate('visTypeMetric.function.colorScheme.help', {
-        defaultMessage: 'Color scheme to use',
-      }),
+      help: 'Color scheme to use.',
     },
     colorMode: {
       types: ['string'],
       default: '"None"',
       options: ['None', 'Label', 'Background'],
-      help: i18n.translate('visTypeMetric.function.colorMode.help', {
-        defaultMessage: 'Which part of metric to color',
-      }),
+      help: 'Which part of metric to color.',
     },
     colorRange: {
       types: ['range'],
       multi: true,
-      help: i18n.translate('visTypeMetric.function.colorRange.help', {
-        defaultMessage:
-          'A range object specifying groups of values to which different colors should be applied.',
-      }),
+      help: 'A range object specifying groups of values to which different colors should be applied.',
     },
     useRanges: {
       types: ['boolean'],
       default: false,
-      help: i18n.translate('visTypeMetric.function.useRanges.help', {
-        defaultMessage: 'Enabled color ranges.',
-      }),
+      help: 'Enabled color ranges.',
     },
     invertColors: {
       types: ['boolean'],
       default: false,
-      help: i18n.translate('visTypeMetric.function.invertColors.help', {
-        defaultMessage: 'Inverts the color ranges',
-      }),
+      help: 'Inverts the color ranges.',
     },
     showLabels: {
       types: ['boolean'],
       default: true,
-      help: i18n.translate('visTypeMetric.function.showLabels.help', {
-        defaultMessage: 'Shows labels under the metric values.',
-      }),
+      help: 'Shows labels under the metric values.',
     },
     bgFill: {
       types: ['string'],
       default: '"#000"',
       aliases: ['backgroundFill', 'bgColor', 'backgroundColor'],
-      help: i18n.translate('visTypeMetric.function.bgFill.help', {
-        defaultMessage:
-          'Color as html hex code (#123456), html color (red, blue) or rgba value (rgba(255,255,255,1)).',
-      }),
+      help: 'Color as html hex code (#123456), html color (red, blue) or rgba value (rgba(255,255,255,1)).',
     },
     font: {
       types: ['style'],
-      help: i18n.translate('visTypeMetric.function.font.help', {
-        defaultMessage: 'Font settings.',
-      }),
+      help: 'Font settings.',
       default: '{font size=60}',
     },
     subText: {
       types: ['string'],
       aliases: ['label', 'text', 'description'],
       default: '""',
-      help: i18n.translate('visTypeMetric.function.subText.help', {
-        defaultMessage: 'Custom text to show under the metric',
-      }),
+      help: 'Custom text to show under the metric.',
     },
     metric: {
       types: ['vis_dimension'],
-      help: i18n.translate('visTypeMetric.function.metric.help', {
-        defaultMessage: 'metric dimension configuration',
-      }),
+      help: 'Metric dimension configuration.',
       required: true,
       multi: true,
     },
     bucket: {
       types: ['vis_dimension'],
-      help: i18n.translate('visTypeMetric.function.bucket.help', {
-        defaultMessage: 'bucket dimension configuration',
-      }),
+      help: 'Bucket dimension configuration.',
     },
   },
   fn(context: Context, args: Arguments) {

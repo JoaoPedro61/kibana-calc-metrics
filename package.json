@@ -18,6 +18,7 @@
     "build": "plugin-helpers build"
   },
   "dependencies": {
+    "@elastic/eui": "^24.0.0",
     "@kbn/i18n": "link:../../packages/kbn-i18n",
     "typescript": "^3.9.2"
   },

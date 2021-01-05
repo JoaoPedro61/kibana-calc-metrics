@@ -20,7 +20,7 @@
 import {last, findIndex, isNaN} from 'lodash';
 import React, {Component} from 'react';
 import {isColorDark} from '@elastic/eui';
-import {getHeatmapColors} from 'ui/vislib/components/color/heatmap_color';
+import {getHeatmapColors} from '../../../../src/plugins/charts/public';
 import {getFormat} from 'ui/visualize/loader/pipeline_helpers/utilities';
 
 import {ExtendedMetricVisValue} from './extended_metric_vis_value';
